@@ -42,6 +42,7 @@ public class AndroidFlickrActivity extends Activity implements OnClickListener {
 	private GridView gridView;
 	private Bitmap bmFlickr;
 	public static FlickrImage[] myFlickrImage;
+
 	// ** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -125,10 +126,10 @@ public class AndroidFlickrActivity extends Activity implements OnClickListener {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			progressDialog = new ProgressDialog(AndroidFlickrActivity.this);
+			progressDialog.setCanceledOnTouchOutside(false);
 			progressDialog
 					.setMessage("Loading images from Flickr. Please wait...");
 			progressDialog.show();
-			gridView.setEnabled(false);
 		}
 
 		@Override
@@ -171,11 +172,7 @@ public class AndroidFlickrActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(FlickrImage[] result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			if(progressDialog.isShowing())
-			{
 			progressDialog.dismiss();
-			gridView.setEnabled(true);
-			}
 			currentIndex = 0;
 			totalCount = 0;
 			gridView.setAdapter(new FlickrAdapter(AndroidFlickrActivity.this,
