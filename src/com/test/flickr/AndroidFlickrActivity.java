@@ -36,12 +36,12 @@ import android.widget.Toast;
 
 public class AndroidFlickrActivity extends Activity implements OnClickListener {
 
+	
+	private EditText searchText;
+	private Button searchButton;
+	private GridView gridView;
+	private Bitmap bmFlickr;
 	public static FlickrImage[] myFlickrImage;
-	EditText searchText;
-	Button searchButton;
-	GridView gridView;
-	Bitmap bmFlickr;
-
 	// ** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
