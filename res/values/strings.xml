@@ -4,5 +4,6 @@
     <string name="app_name">TestFlickr</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="flickr_url">https://api.flickr.com/services/feeds/photos_public.gne</string>
 
 </resources>

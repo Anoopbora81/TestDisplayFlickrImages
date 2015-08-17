@@ -1,5 +1,7 @@
 package com.test.flickr;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -11,47 +13,59 @@ import android.widget.ImageView;
 import com.test.flickr.FlickrImage;
 public class FlickrAdapter extends BaseAdapter {
 	private Context context;
-	private FlickrImage[] FlickrAdapterImage;;
+//	private FlickrImage[] FlickrAdapterImage;
+	private ArrayList<FlickrImage> FlickrAdapterImage;;
 	
 	FlickrAdapter(Context c) {
 		context = c;
 	}
 
 
-	public FlickrAdapter(Context c, FlickrImage[] fImage) {
+	public FlickrAdapter(Context c, ArrayList<FlickrImage> fImage) {
 		context = c;
 		FlickrAdapterImage = fImage;
+		notifyDataSetChanged();
 	}
-
+	
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return FlickrAdapterImage.length;
+		return FlickrAdapterImage.size();
 	}
 
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return FlickrAdapterImage[position];
+		return FlickrAdapterImage.get(position);
 	}
 
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
 	}
+	
+	/**
+     * Updates grid data and refresh grid items.
+     * @param mGridData
+     */
+    public void setGridData(ArrayList<FlickrImage> mGridData) {
+        this.FlickrAdapterImage = mGridData;
+        notifyDataSetChanged();
+    }
+
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		ImageView image;
 		if (convertView == null) {
 			image = new ImageView(context);
-			image.setLayoutParams(new GridView.LayoutParams(350,350));
+			image.setLayoutParams(new GridView.LayoutParams(100,100));
 				//	LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			image.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			image.setPadding(8, 8, 8, 8);
+			image.setPadding(5, 5, 5, 5);
 		} else {
 			image = (ImageView) convertView;
 		}
 
-		image.setImageBitmap(FlickrAdapterImage[position].getBitmap());
+		image.setImageBitmap(FlickrAdapterImage.get(position).getBitmap());
 		image.setOnClickListener(new ImageGridViewCellOnClickListener(position));
 		return image;
 	}
